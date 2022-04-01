@@ -6,6 +6,10 @@ t_trie	*generate_node(char *value)
 	int		i;
 
 	new = malloc(sizeof(t_trie));
+	if (new == NULL)
+	{
+		return (NULL);
+	}
 	new->value = value;
 	new->is_end = false;
 	i = 0;
