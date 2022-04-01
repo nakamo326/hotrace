@@ -16,5 +16,6 @@ typedef struct s_trie {
 }	t_trie;
 
 t_trie	*generate_node(char *value);
+t_trie	*make_trie(void);
 
 #endif /* TRIE_H */
