@@ -19,8 +19,8 @@ ALIGN := $(shell tr ' ' '\n' <<<"$(SRCFILE)" | while read line; do echo \
 all: $(NAME)
 -include $(DEPS)
 
-d:
-	echo $(OBJS)
+dict:
+	cat /usr/share/dict/words | awk '{printf "%s\n%s\n", $1,NR}' > dict.txt
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $^ -o $@
@@ -48,7 +48,7 @@ re: fclean all
 debug: CXXFLAGS += -g -fsanitize=integer -fsanitize=address -DDEBUG
 debug: re
 
-.PHONY: all clean fclean re debug test gtest run
+.PHONY: all clean fclean re debug run dict
 
 # ==== Color define ==== #
 YLW := \033[33m
