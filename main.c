@@ -6,6 +6,7 @@ int	main(void)
 	t_trie	*root;
 
 	root = make_trie();
-	write(1, "hello world.\n", 13);
+	search_trie(root);
+	(void)root;
 	return (0);
 }
