@@ -20,7 +20,7 @@ all: $(NAME)
 -include $(DEPS)
 
 dict:
-	cat /usr/share/dict/words | awk '{printf "%s\n%s\n", $1,NR}' > dict.txt
+	cat /usr/share/dict/words | awk '{printf "%s\n%s\n", $$1,NR}' > dict.txt
 
 $(NAME): $(OBJS)
 	@$(CC) $(CFLAGS) $^ -o $@
