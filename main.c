@@ -53,6 +53,7 @@ void	loop(t_trie *trie, t_input_state i_state)
 	char	*key_str;
 	t_trie	*ret;
 
+	key_str = NULL;
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
