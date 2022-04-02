@@ -6,7 +6,7 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:04:23 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/01 22:17:48 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:46:14 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,9 @@
 // it will change the ring's attrubutes: used, cap, first_nl and exhausted.
 bool	read_to_ring(int fd, t_ring *ring)
 {
-	char	*read_buffer;
+	char	read_buffer[BUFFER_SIZE];
 	ssize_t	read_size;
 
-	read_buffer = (char *)malloc(sizeof(char) * (size_t)BUFFER_SIZE);
-	if (!read_buffer)
-		return (false);
 	read_size = read(fd, read_buffer, (size_t)BUFFER_SIZE);
 	if (read_size < 0)
 	{
@@ -36,7 +33,6 @@ bool	read_to_ring(int fd, t_ring *ring)
 		return (false);
 	}
 	append_to_ring(ring, read_buffer, read_size);
-	free(read_buffer);
 	return (true);
 }
 

@@ -6,7 +6,7 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 22:54:48 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/01 22:11:06 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:47:13 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdio.h>
 # include <stdbool.h>
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 1024
+#  define BUFFER_SIZE 8192
 # endif
 
 // - start: リングバッファの先頭の**インデックス**
