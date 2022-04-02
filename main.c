@@ -12,17 +12,45 @@
 
 #include "hotrace.h"
 
-int	main(void)
+t_input_state	set_key(char **key_str, char *line)
 {
-	t_input_state	i_state;
+	t_input_state	res;
+
+	if (line[0])
+	{
+		*key_str = line;
+		res = STATE_WAIT_VALUE;
+	}
+	else
+	{
+		free(line);
+		res = STATE_WAIT_QUERY;
+	}
+}
+
+void	search_query(t_trie *trie, char *query)
+{
+	char	*res;
+
+	res = trie_retrieve(trie, query);
+	if (res)
+	{
+		ft_putstr(res);
+		ft_putstr("\n");
+	}
+	else
+	{
+		ft_putstr(query);
+		ft_putstr(": Not found.\n");
+	}
+}
+
+// TODO: trie_insert エラーチェック
+void	loop(t_trie *trie, t_input_state i_state)
+{
 	char			*line;
 	char			*key_str;
-	char			*value_str;
-	char			*query_result;
-	t_trie			trie;
 
-	trie_construct(&trie);
-	i_state = STATE_WAIT_KEY;
 	while (1)
 	{
 		line = get_next_line(STDIN_FILENO);
@@ -30,40 +58,27 @@ int	main(void)
 			break ;
 		if (i_state == STATE_WAIT_KEY)
 		{
-			if (line[0])
-			{
-				key_str = line;
-				i_state = STATE_WAIT_VALUE;
-				continue ;
-			}
-			else
-			{
-				i_state = STATE_WAIT_QUERY;
-			}
+			i_state = set_key(&key_str, line);
+			continue ;
 		}
 		else if (i_state == STATE_WAIT_VALUE)
 		{
-			value_str = line;
-			trie_insert(&trie, key_str, value_str); // TODO: エラーチェック
+			trie_insert(&trie, key_str, line);
 			i_state = STATE_WAIT_KEY;
 			free(key_str);
 			continue ;
 		}
 		else if (i_state == STATE_WAIT_QUERY)
-		{
-			// Query
-			query_result = trie_retrieve(&trie, line);
-			if (query_result)
-			{
-				ft_putstr(query_result);
-				ft_putstr("\n");
-			}
-			else
-			{
-				ft_putstr(line);
-				ft_putstr(": Not found.\n");
-			}
-		}
+			search_query(&trie, line);
 		free(line);
 	}
+}
+
+int	main(void)
+{
+	t_trie	trie;
+
+	trie_construct(&trie);
+	loop(&trie, STATE_WAIT_KEY);
+	return (0);
 }
