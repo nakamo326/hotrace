@@ -21,6 +21,7 @@ typedef enum e_input_state {
 	STATE_WAIT_KEY,
 	STATE_WAIT_VALUE,
 	STATE_WAIT_QUERY,
+	STATE_ERROR,
 }	t_input_state;
 
 #endif

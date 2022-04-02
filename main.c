@@ -46,12 +46,25 @@ void	search_query(t_trie *trie, char *query)
 	}
 }
 
+t_input_state	add_entry(t_trie *trie, char *key, char *value)
+{
+	t_trie	*ret;
+
+	ret = trie_insert(trie, key, value);
+	if (!ret)
+	{
+		free(value);
+		return (STATE_ERROR);
+	}
+	free(key);
+	return (STATE_WAIT_KEY);
+}
+
 // TODO: trie_insert エラーチェック
 void	loop(t_trie *trie, t_input_state i_state)
 {
 	char	*line;
 	char	*key_str;
-	t_trie	*ret;
 
 	key_str = NULL;
 	while (1)
@@ -66,11 +79,9 @@ void	loop(t_trie *trie, t_input_state i_state)
 		}
 		else if (i_state == STATE_WAIT_VALUE)
 		{
-			ret = trie_insert(trie, key_str, line);
-			if (!ret)
-				free(line);
-			i_state = STATE_WAIT_KEY;
-			free(key_str);
+			i_state = add_entry(trie, key_str, line);
+			if (i_state == STATE_ERROR)
+				break ;
 			continue ;
 		}
 		else if (i_state == STATE_WAIT_QUERY)
