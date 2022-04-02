@@ -15,7 +15,6 @@
 # include "trie.h"
 # include "trie_allocator.h"
 # include "get_next_line.h"
-# include <stdio.h>
 
 typedef enum e_input_state {
 	STATE_DUMMY,
