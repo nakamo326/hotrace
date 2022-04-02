@@ -6,7 +6,7 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 21:07:05 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/02 14:57:55 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/02 15:01:45 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,11 @@ t_trie	*trie_allocate(void)
 // head == '\0' is for root.
 void	trie_construct(t_trie *trie)
 {
-	ft_bzero(trie->nexts, sizeof(t_trie *) * N_CHARTYPES);
+	size_t	i;
+
+	i = -1;
+	while (++i < N_CHARTYPES)
+		trie->nexts[i] = NULL;
 	trie->is_end = false;
 }
 
