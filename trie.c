@@ -6,25 +6,25 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 21:07:05 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/01 22:22:10 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/02 14:57:55 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "trie.h"
 
-t_trie	*trie_allocate(char head)
+t_trie	*trie_allocate(void)
 {
 	t_trie	*trie;
 
 	trie = malloc(sizeof(t_trie));
 	if (!trie)
 		return (NULL);
-	trie_construct(trie, head);
+	trie_construct(trie);
 	return (trie);
 }
 
 // head == '\0' is for root.
-void	trie_construct(t_trie *trie, char head)
+void	trie_construct(t_trie *trie)
 {
 	ft_bzero(trie->nexts, sizeof(t_trie *) * N_CHARTYPES);
 	trie->is_end = false;
@@ -45,7 +45,7 @@ t_trie	*trie_insert(t_trie	*trie, const char *key, const char *value)
 		if (!is_acceptable(head))
 			return (NULL);
 		if (!(trie->nexts[head - ' ']))
-			trie->nexts[head - ' '] = trie_allocate(head);
+			trie->nexts[head - ' '] = trie_allocate();
 		trie = trie->nexts[head - ' '];
 		if (!trie)
 			return (NULL);

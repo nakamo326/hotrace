@@ -6,7 +6,7 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:34:06 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/01 22:17:09 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/02 14:57:48 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@ typedef struct s_trie {
 	char			*value;
 }	t_trie;
 
-t_trie	*trie_allocate(char head);
-void	trie_construct(t_trie *trie, char head);
+t_trie	*trie_allocate(void);
+void	trie_construct(t_trie *trie);
 t_trie	*trie_insert(t_trie	*trie, const char *key, const char *value);
 char	*trie_retrieve(t_trie *trie, const char *query_str);
 
