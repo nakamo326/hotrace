@@ -24,7 +24,7 @@ void	init_trie_allocator(t_trie_allocator *alloc)
 
 t_trie_allocator	*expand_trie_allocator(t_trie_allocator	*current)
 {
-	t_trie_allocator *res;
+	t_trie_allocator	*res;
 
 	res = malloc(sizeof(t_trie_allocator));
 	init_trie_allocator(res);
