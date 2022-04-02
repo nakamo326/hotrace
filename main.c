@@ -49,8 +49,9 @@ void	search_query(t_trie *trie, char *query)
 // TODO: trie_insert エラーチェック
 void	loop(t_trie *trie, t_input_state i_state)
 {
-	char			*line;
-	char			*key_str;
+	char	*line;
+	char	*key_str;
+	t_trie	*ret;
 
 	while (1)
 	{
@@ -64,7 +65,9 @@ void	loop(t_trie *trie, t_input_state i_state)
 		}
 		else if (i_state == STATE_WAIT_VALUE)
 		{
-			trie_insert(trie, key_str, line);
+			ret = trie_insert(trie, key_str, line);
+			if (!ret)
+				free(line);
 			i_state = STATE_WAIT_KEY;
 			free(key_str);
 			continue ;
@@ -77,9 +80,12 @@ void	loop(t_trie *trie, t_input_state i_state)
 
 int	main(void)
 {
-	t_trie	trie;
+	t_trie				*trie;
+	t_trie_allocator	*root;
 
-	trie_construct(&trie);
-	loop(&trie, STATE_WAIT_KEY);
+	root = malloc(sizeof(t_trie_allocator));
+	trie = trie_allocate(root);
+	loop(trie, STATE_WAIT_KEY);
+	deallocate_trie(root);
 	return (0);
 }

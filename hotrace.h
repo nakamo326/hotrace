@@ -13,6 +13,7 @@
 #ifndef HOTRACE_H
 # define HOTRACE_H
 # include "trie.h"
+# include "trie_allocator.h"
 # include "get_next_line.h"
 # include <stdio.h>
 

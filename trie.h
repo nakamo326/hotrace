@@ -26,7 +26,6 @@ typedef struct s_trie {
 	char			*value;
 }	t_trie;
 
-t_trie	*trie_allocate(void);
 void	trie_construct(t_trie *trie);
 t_trie	*trie_insert(t_trie	*trie, const char *key, const char *value);
 char	*trie_retrieve(t_trie *trie, const char *query_str);
