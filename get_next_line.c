@@ -6,7 +6,7 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/03 18:04:23 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/02 15:46:14 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/02 16:45:31 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,12 @@ bool	read_to_ring(int fd, t_ring *ring)
 	read_size = read(fd, read_buffer, (size_t)BUFFER_SIZE);
 	if (read_size < 0)
 	{
-		// free(read_buffer);
 		return (false);
 	}
 	if (ring->used + read_size > ring->cap)
 		ring->buffer = extend_ring(ring);
 	if (!ring->buffer)
 	{
-		// free(read_buffer);
 		return (false);
 	}
 	append_to_ring(ring, read_buffer, read_size);
