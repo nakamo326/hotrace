@@ -11,17 +11,7 @@
 /* ************************************************************************** */
 
 #include "trie.h"
-
-t_trie	*trie_allocate(void)
-{
-	t_trie	*trie;
-
-	trie = malloc(sizeof(t_trie));
-	if (!trie)
-		return (NULL);
-	trie_construct(trie);
-	return (trie);
-}
+#include "trie_allocator.h"
 
 // head == '\0' is for root.
 void	trie_construct(t_trie *trie)
@@ -49,7 +39,7 @@ t_trie	*trie_insert(t_trie	*trie, const char *key, const char *value)
 		if (!is_acceptable(head))
 			return (NULL);
 		if (!(trie->nexts[head - ' ']))
-			trie->nexts[head - ' '] = trie_allocate();
+			trie->nexts[head - ' '] = trie_allocate(NULL);
 		trie = trie->nexts[head - ' '];
 		if (!trie)
 			return (NULL);
