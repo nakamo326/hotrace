@@ -15,7 +15,6 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-void	ft_bzero(void *dst, size_t n);
 void	ft_putstr(const char *str);
 
 #endif
