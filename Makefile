@@ -7,7 +7,7 @@ INCLUDES = .
 
 SRCDIR := .
 OBJDIR := objs
-SRCFILE := ./ft_bzero.c ./trie_allocator.c ./get_next_line.c ./ft_putstr.c ./trie.c ./get_next_line_utils.c ./main.c 
+SRCFILE := ./ft_bzero.c ./deallocate_trie.c ./trie_allocator.c ./get_next_line.c ./ft_putstr.c ./trie.c ./get_next_line_utils.c ./main.c 
 OBJS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SRCFILE:.c=.o))
 DEPS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SRCFILE:.c=.d))
 

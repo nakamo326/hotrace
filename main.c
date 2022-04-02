@@ -83,8 +83,9 @@ int	main(void)
 	t_trie				*trie;
 	t_trie_allocator	*root;
 
-	root = malloc(sizeof(t_trie_allocator));
-	trie = trie_allocate(root);
+	trie = init_root(&root);
+	if (!trie)
+		return (1);
 	loop(trie, STATE_WAIT_KEY);
 	deallocate_trie(root);
 	return (0);

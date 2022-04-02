@@ -22,6 +22,7 @@ typedef struct s_trie_allocator {
 	size_t						used;
 }	t_trie_allocator;
 
+t_trie				*init_root(t_trie_allocator **root);
 void				init_trie_allocator(t_trie_allocator *alloc);
 t_trie_allocator	*expand_trie_allocator(t_trie_allocator	*current);
 t_trie				*trie_allocate(t_trie_allocator *root);
