@@ -26,6 +26,7 @@ t_input_state	set_key(char **key_str, char *line)
 		free(line);
 		res = STATE_WAIT_QUERY;
 	}
+	return (res);
 }
 
 void	search_query(t_trie *trie, char *query)
@@ -63,13 +64,13 @@ void	loop(t_trie *trie, t_input_state i_state)
 		}
 		else if (i_state == STATE_WAIT_VALUE)
 		{
-			trie_insert(&trie, key_str, line);
+			trie_insert(trie, key_str, line);
 			i_state = STATE_WAIT_KEY;
 			free(key_str);
 			continue ;
 		}
 		else if (i_state == STATE_WAIT_QUERY)
-			search_query(&trie, line);
+			search_query(trie, line);
 		free(line);
 	}
 }
