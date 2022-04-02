@@ -43,7 +43,6 @@ t_trie	*trie_allocate(t_trie_allocator *root)
 		return (NULL);
 	if (root != NULL)
 	{
-		init_trie_allocator(root);
 		current = root;
 	}
 	else if (current->used == N_TRIE)
@@ -59,28 +58,14 @@ t_trie	*trie_allocate(t_trie_allocator *root)
 	return (res);
 }
 
-void	free_tries(t_trie *tries, size_t used)
+t_trie	*init_root(t_trie_allocator **root)
 {
-	size_t	i;
+	t_trie	*trie;
 
-	i = 0;
-	while (i < used)
-	{
-		free(tries[i].value);
-		i++;
-	}
-}
-
-void	deallocate_trie(t_trie_allocator *alloc)
-{
-	t_trie_allocator	*ptr;
-
-	ptr = alloc;
-	while (ptr)
-	{
-		alloc = ptr->next;
-		free_tries(ptr->tries, ptr->used);
-		free(ptr);
-		ptr = alloc;
-	}
+	*root = malloc(sizeof(t_trie_allocator));
+	if (!*root)
+		return (NULL);
+	init_trie_allocator(*root);
+	trie = trie_allocate(*root);
+	return (trie);
 }
