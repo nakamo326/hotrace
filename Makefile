@@ -2,12 +2,12 @@ NAME := hotrace
 
 SHELL := /bin/bash
 CC := cc
-CFLAGS = -Wall -Wextra -Werror -MMD -MP -I$(INCLUDES) #-O3
+CFLAGS = -Wall -Wextra -Werror -MMD -MP -I$(INCLUDES) -O2
 INCLUDES = .
 
 SRCDIR := .
 OBJDIR := objs
-SRCFILE := $(shell find -name "*.c" -type f)
+SRCFILE := ./deallocate_trie.c ./trie_allocator.c ./get_next_line.c ./ft_putstr.c ./trie.c ./get_next_line_utils.c ./main.c 
 OBJS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SRCFILE:.c=.o))
 DEPS = $(patsubst $(SRCDIR)%,$(OBJDIR)%,$(SRCFILE:.c=.d))
 
@@ -48,7 +48,10 @@ re: fclean all
 debug: CXXFLAGS += -g -fsanitize=integer -fsanitize=address -DDEBUG
 debug: re
 
-.PHONY: all clean fclean re debug run dict
+srcs:
+	sed -i -e "s|^SRCFILE :=.*|SRCFILE := `find $(SRCDIR) -name "*.c"  | tr '\n' ' '`|g" ./Makefile
+
+.PHONY: all clean fclean re debug run dict srcs
 
 # ==== Color define ==== #
 YLW := \033[33m
