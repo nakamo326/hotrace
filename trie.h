@@ -14,8 +14,6 @@
 # define TRIE_H
 # define N_CHARTYPES 96
 # include <stdbool.h>
-# include <stdlib.h>
-# include <stdio.h>
 # include "libft.h"
 
 struct	s_trie;
