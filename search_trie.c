@@ -13,7 +13,7 @@ void	query(t_trie *root, char *key)
 	i = 0;
 	while (key[i])
 	{
-		c = key[i];
+		c = key[i] - ' ';
 		if (ptr->array[c] != NULL)
 			ptr = ptr->array[c];
 		i++;
@@ -39,7 +39,7 @@ void	search_trie(t_trie *root)
 		res = get_next_line(STDIN_FILENO, &key);
 		if (res < 0)
 			exit(EXIT_FAILURE);
-		if (strcmp(key, "") == 0)
+		if (key[0] == '\0')
 			break;
 		query(root, key);
 		free(key);

@@ -22,7 +22,7 @@
 # define CONTINUE 3
 # define END 0
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 4096
+#  define BUFFER_SIZE 1023
 # endif
 
 size_t	ft_strlen(const char *s);

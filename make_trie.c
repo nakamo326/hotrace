@@ -15,7 +15,7 @@ t_trie	*generate_node(char *value)
 	new->value = value;
 	new->is_end = false;
 	i = 0;
-	while (i < 256)
+	while (i < CHAR_NUM)
 	{
 		new->array[i] = NULL;
 		i++;
@@ -34,7 +34,7 @@ void	add_trie(t_trie *root, char *key, char *value)
 	ptr = root;
 	while (key[i])
 	{
-		c = key[i];
+		c = key[i] - ' ';
 		if (ptr->array[c] != NULL)
 			ptr = ptr->array[c];
 		else
@@ -64,7 +64,7 @@ t_trie	*make_trie(void)
 		res = get_next_line(STDIN_FILENO, &key);
 		if (res < 0)
 			exit(EXIT_FAILURE);
-		if (strcmp(key, "") == 0)
+		if (key[0] == '\0')
 			break;
 		res = get_next_line(STDIN_FILENO, &value);
 		if (res < 0)
