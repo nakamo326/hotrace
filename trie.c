@@ -22,6 +22,7 @@ void	trie_construct(t_trie *trie)
 	while (++i < N_CHARTYPES)
 		trie->nexts[i] = NULL;
 	trie->is_end = false;
+	trie->value = NULL;
 }
 
 bool	is_acceptable(const char a)
