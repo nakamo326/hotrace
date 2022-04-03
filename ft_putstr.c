@@ -34,22 +34,25 @@ void	ft_putstr(const char *str)
 void	putstr_buf(const char *str, bool flush)
 {
 	static char		buf[STDOUT_BUF];
-	static size_t	i = 0;
+	static size_t	buf_idx = 0;
 	ssize_t			res;
 	const size_t	n = ft_strlen(str);
 
 	(void)res;
-	if (i + n < STDOUT_BUF && flush == false)
+	if (buf_idx + n >= STDOUT_BUF)
 	{
-		while (i < i + n)
-		{
-			buf[i] = *str;
-			str++;
-			i++;
-		}
+		res = write(STDOUT_FILENO, buf, buf_idx);
+		buf_idx = 0;
+	}
+	if (flush == true)
+	{
+		res = write(STDOUT_FILENO, buf, buf_idx);
 		return ;
-	} else {
-		res = write(STDOUT_FILENO, buf, i);
-		i = 0;
+	}
+	while (*str)
+	{
+		buf[buf_idx] = *str;
+		str++;
+		buf_idx++;
 	}
 }
