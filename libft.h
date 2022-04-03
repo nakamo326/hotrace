@@ -14,7 +14,11 @@
 # define LIBFT_H
 # include <stdlib.h>
 # include <unistd.h>
+# include <stdbool.h>
+
+# define STDOUT_BUF 8192
 
 void	ft_putstr(const char *str);
+void	putstr_buf(const char *str, bool flush);
 
 #endif

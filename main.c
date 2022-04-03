@@ -36,13 +36,13 @@ void	search_query(t_trie *trie, char *query)
 	res = trie_retrieve(trie, query);
 	if (res)
 	{
-		ft_putstr(res);
-		ft_putstr("\n");
+		putstr_buf(res, false);
+		putstr_buf("\n", false);
 	}
 	else
 	{
-		ft_putstr(query);
-		ft_putstr(": Not found.\n");
+		putstr_buf(query, false);
+		putstr_buf(": Not found.\n", false);
 	}
 }
 
@@ -99,6 +99,7 @@ int	main(void)
 	if (!trie)
 		return (1);
 	loop(trie, STATE_WAIT_KEY);
+	putstr_buf("", true);
 	deallocate_trie(root);
 	return (0);
 }

@@ -30,3 +30,31 @@ void	ft_putstr(const char *str)
 	res = write(STDOUT_FILENO, str, n);
 	(void)res;
 }
+
+void	putstr_buf(const char *str, bool flush)
+{
+	static char		buf[STDOUT_BUF];
+	static size_t	buf_idx = 0;
+	ssize_t			res;
+	const size_t	n = ft_strlen(str);
+
+	(void)res;
+	if (flush || buf_idx + n > STDOUT_BUF)
+	{
+		res = write(STDOUT_FILENO, buf, buf_idx);
+		buf_idx = 0;
+		if (flush)
+			return ;
+	}
+	if (n > STDOUT_BUF)
+	{
+		res = write(STDOUT_FILENO, str, n);
+		return ;
+	}
+	while (*str)
+	{
+		buf[buf_idx] = *str;
+		str++;
+		buf_idx++;
+	}
+}
