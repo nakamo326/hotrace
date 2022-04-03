@@ -39,7 +39,7 @@ void	putstr_buf(const char *str, bool flush)
 	const size_t	n = ft_strlen(str);
 
 	(void)res;
-	if (buf_idx + n > STDOUT_BUF || flush)
+	if (flush || buf_idx + n > STDOUT_BUF)
 	{
 		res = write(STDOUT_FILENO, buf, buf_idx);
 		buf_idx = 0;
