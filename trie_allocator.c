@@ -27,6 +27,8 @@ t_trie_allocator	*expand_trie_allocator(t_trie_allocator	*current)
 	t_trie_allocator	*res;
 
 	res = malloc(sizeof(t_trie_allocator));
+	if (!res)
+		return (NULL);
 	init_trie_allocator(res);
 	res->root = current->root;
 	current->next = res;
