@@ -6,7 +6,7 @@
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/04/01 20:39:57 by corvvs            #+#    #+#             */
-/*   Updated: 2022/04/01 22:16:56 by corvvs           ###   ########.fr       */
+/*   Updated: 2022/04/04 19:24:43 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 # include "trie.h"
 # include "trie_allocator.h"
 # include "get_next_line.h"
+# include "rd_file.h"
 
 typedef enum e_input_state {
 	STATE_DUMMY,
@@ -23,5 +24,8 @@ typedef enum e_input_state {
 	STATE_WAIT_QUERY,
 	STATE_ERROR,
 }	t_input_state;
+
+char	**ft_split(char *s, char c);
+
 
 #endif

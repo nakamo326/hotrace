@@ -1,40 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deallocate_trie.c                                  :+:      :+:    :+:   */
+/*   ft_lib.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 20:05:21 by ynakamot          #+#    #+#             */
-/*   Updated: 2022/04/04 19:25:41 by corvvs           ###   ########.fr       */
+/*   Created: 2022/04/04 19:28:08 by corvvs            #+#    #+#             */
+/*   Updated: 2022/04/04 19:33:44 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "trie.h"
-#include "trie_allocator.h"
+#include <stdlib.h>
 
-void	free_tries(t_trie *tries, size_t used)
+void	ft_bzero(void *s, size_t n)
 {
-	size_t	i;
+	size_t			i;
+	unsigned char	*us;
 
-	i = 0;
-	while (i < used)
-	{
-		free(tries[i].value);
-		i++;
-	}
+	i = -1;
+	us = s;
+	while (++i < n)
+		us[i] = 0;
 }
 
-void	deallocate_trie(t_trie_allocator *alloc)
+void	*ft_memcpy(void *dest, const void *src, size_t n)
 {
-	t_trie_allocator	*ptr;
+	size_t			i;
+	unsigned char	*ud;
+	unsigned char	*us;
 
-	ptr = alloc;
-	while (ptr)
-	{
-		alloc = ptr->next;
-		// free_tries(ptr->tries, ptr->used);
-		free(ptr);
-		ptr = alloc;
-	}
+	i = -1;
+	ud = dest;
+	us = (unsigned char*)src;
+	while (++i < n)
+		*ud++ = *us++;
+	return (dest);
 }

@@ -1,0 +1,68 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   rd_file.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2021/12/01 11:36:10 by corvvs            #+#    #+#             */
+/*   Updated: 2022/04/04 19:27:30 by corvvs           ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
+#include "rd_file.h"
+
+static void	deploy_buffer(t_plastic_buffer *buffer)
+{
+	char	*new_body;
+
+	if (buffer->cap > 0)
+		buffer->cap = buffer->cap * 2;
+	else
+		buffer->cap = FT_BUFSIZ;
+	new_body = (char *)malloc((buffer->cap + 1) * sizeof(char));
+	if (!new_body)
+	{
+		free(buffer->body);
+		return ;
+	}
+	if (new_body)
+	{
+		ft_memcpy(new_body, buffer->body, buffer->used);
+		free(buffer->body);
+	}
+	buffer->body = new_body;
+}
+
+static char	*read_from_fd(const int fd)
+{
+	char				read_buf[FT_BUFSIZ];
+	ssize_t				read_size;
+	t_plastic_buffer	data_buf;
+
+	ft_bzero(&data_buf, sizeof(t_plastic_buffer));
+	while (1)
+	{
+		read_size = read(fd, read_buf, FT_BUFSIZ);
+		if (read_size <= 0)
+			break ;
+		if (data_buf.used + read_size > data_buf.cap)
+			deploy_buffer(&data_buf);
+		if (!data_buf.body)
+			return (NULL);
+		ft_memcpy(data_buf.body + data_buf.used, read_buf, read_size);
+		data_buf.used += read_size;
+	}
+	if (read_size < 0 || !data_buf.body)
+	{
+		free(data_buf.body);
+		return (NULL);
+	}
+	data_buf.body[data_buf.used] = '\0';
+	return (data_buf.body);
+}
+
+char	*rd_read_fd_content(int fd)
+{
+	return (read_from_fd(fd));
+}

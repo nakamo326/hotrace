@@ -1,40 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   deallocate_trie.c                                  :+:      :+:    :+:   */
+/*   rd_file.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: corvvs <corvvs@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/04/02 20:05:21 by ynakamot          #+#    #+#             */
-/*   Updated: 2022/04/04 19:25:41 by corvvs           ###   ########.fr       */
+/*   Created: 2021/12/01 11:37:12 by corvvs            #+#    #+#             */
+/*   Updated: 2022/04/04 19:33:14 by corvvs           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "trie.h"
-#include "trie_allocator.h"
+#ifndef RD_FILE_H
+# define RD_FILE_H
 
-void	free_tries(t_trie *tries, size_t used)
+# include <unistd.h>
+# include <fcntl.h>
+# include <stdbool.h>
+# include <stdio.h>
+# include <stdlib.h>
+# define FT_BUFSIZ 4096
+
+typedef struct s_plastic_buffer
 {
-	size_t	i;
+	char	*body;
+	size_t	cap;
+	size_t	used;
+}	t_plastic_buffer;
 
-	i = 0;
-	while (i < used)
-	{
-		free(tries[i].value);
-		i++;
-	}
-}
+void	ft_bzero(void *s, size_t n);
+void	*ft_memcpy(void *dest, const void *src, size_t n);
+char	*rd_read_fd_content(int fd);
 
-void	deallocate_trie(t_trie_allocator *alloc)
-{
-	t_trie_allocator	*ptr;
 
-	ptr = alloc;
-	while (ptr)
-	{
-		alloc = ptr->next;
-		// free_tries(ptr->tries, ptr->used);
-		free(ptr);
-		ptr = alloc;
-	}
-}
+#endif
