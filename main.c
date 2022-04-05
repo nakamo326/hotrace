@@ -99,7 +99,7 @@ int	main(void)
 	if (!trie)
 		return (1);
 	loop(trie, STATE_WAIT_KEY);
-	putstr_buf("", true);
+	putstr_flush();
 	deallocate_trie(root);
 	return (0);
 }

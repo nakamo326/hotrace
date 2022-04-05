@@ -31,6 +31,11 @@ void	ft_putstr(const char *str)
 	(void)res;
 }
 
+void	putstr_flush(void)
+{
+	putstr_buf("", true);
+}
+
 void	putstr_buf(const char *str, bool flush)
 {
 	static char		buf[STDOUT_BUF];

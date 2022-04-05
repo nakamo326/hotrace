@@ -20,5 +20,6 @@
 
 void	ft_putstr(const char *str);
 void	putstr_buf(const char *str, bool flush);
+void	putstr_flush(void);
 
 #endif
